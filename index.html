@@ -4,21 +4,27 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>First task</title>
+	<title>Vue</title>
 	<script src="./node_modules/vue/dist/vue.js"></script>
 </head>
 <body>
 	<div id="app">
 		<div class="product">
-			<div class="product_image">
-				<a :href="url" :title="title">
-					<img :src="image" :alt="imgAlt">
+			<div class="product_image">The Vue Instance
+				<!-- Second - Attribute Binding -->
+				<a :href="linkHref" :title="imageAlt">
+					<img :src="image" :alt="imageAlt" width="990" height="1000">
 				</a>
 			</div>
 			<div class="product_info">
+				<!-- First - The Vue Instance -->
 				<h1>{{ product }}</h1>
 				<p>{{ description }}</p>
-				<p v-show="onSale">On Sale!</p>
+				<!-- Third - Conditional Rendering -->
+				<p v-if="inStock">In Stock</p>
+				<p v-else :class="{ outOfStockText: !inStock }">
+				Out Of Stock
+				</p>
 			</div>
 		</div>
 	</div>
