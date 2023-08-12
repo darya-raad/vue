@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="index.css">
 	<title>Vue</title>
 </head>
 <body>
@@ -17,11 +18,12 @@
 			</div>
 			<div class="product_info">
 				<!-- First - The Vue Instance -->
-				<h1>{{ product }}</h1>
+				<h1>{{ title }}</h1>
 				<p>{{ description }}</p>
 				<!-- Third - Conditional Rendering -->
 				<p v-if="inStock">In Stock</p>
-				<p v-else :class="{ outOfStockText: !inStock }">
+				<p v-else 
+					:class="{ outOfStockText: !inStock }">
 					Out Of Stock
 				</p>
 				<span v-show="onSale">“On Sale!”</span>
@@ -29,20 +31,25 @@
 				<ul>
 					<li v-for="detail in details">{{ detail }}</li>
 				</ul>
-				<!-- <div v-for="variant in variants" :key="variant.variantId"
-				:style="{ backgroundColor: variant.variantColor }"
-				 @mouseover="updateProduct(variant.variantImage)">
-				</div> -->
-
-          <div v-for="variant in variants" :key="variant.variantId">
-            <p @mouseover="updatePtoduct(variant.variantImage)">
-              {{ variant.variantColor }}
-            </p>
-          </div>
-
+				<div v-for="(variant, index) in variants" 
+					:key="variant.variantId"
+					class="color-box"
+					:style="{ backgroundColor: variant.variantColor }"
+					@mouseover="updatePtoduct(index)">
+				</div>
 				<ul>
 					<li v-for="size in sizes">{{ size }}</li>
 				</ul>
+				<!-- Fifth - Event Handling -->
+				<button v-on:click="addToCart" 
+						:disabled="!inStock"
+						:class="{ disabledButton: !inStock }"> add to cart</button>
+				<button v-on:click="removeFromToCart"> remov to cart</button>
+
+				<div class="cart">
+					<p> Cart{{cart}}</p>
+				</div>
+				<p>{{ sale }}</p>
 			</div>
 		</div>
 	</div>
